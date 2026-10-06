@@ -1,0 +1,117 @@
+{{#*inline "badge"}}
+{{#if state.ruleId}}
+<button type="button" class="{{css}}badge {{css}}badge-{{state.kind}}" data-action="editRule"
+  data-rule="{{state.ruleId}}" data-tooltip="PF1SV.Apply.EditRule">{{state.text}}</button>
+{{else}}
+<span class="{{css}}badge {{css}}badge-{{state.kind}}">{{state.text}}</span>
+{{/if}}
+{{/inline}}
+<div class="{{css}}body">
+  <fieldset class="{{css}}controls">
+    <div class="form-group">
+      <label>{{localize "PF1SV.Field.Kind"}}</label>
+      <div class="form-fields">
+        <select data-field="kind">{{selectOptions kinds selected=draft.kind localize=true}}</select>
+      </div>
+    </div>
+
+    {{#if isGrant}}
+    <div class="form-group">
+      <label>{{localize "PF1SV.Field.Sense"}}</label>
+      <div class="form-fields">
+        <select data-field="sense">{{selectOptions senses selected=draft.sense valueAttr="id" labelAttr="label"}}</select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>{{localize "PF1SV.Field.Walls"}}</label>
+      <div class="form-fields">
+        <input type="checkbox" data-field="walls" {{checked draft.walls}}>
+      </div>
+      <p class="hint">{{localize "PF1SV.Hint.Walls"}}</p>
+    </div>
+    {{/if}}
+
+    <div class="form-group">
+      <label>{{localize "PF1SV.Field.Priority"}}</label>
+      <div class="form-fields">
+        <input type="number" step="1" data-field="priority" value="{{draft.priority}}">
+      </div>
+      <p class="hint">{{localize "PF1SV.Hint.Priority"}}</p>
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "PF1SV.Field.Lifetime"}}</label>
+      <div class="form-fields">
+        <select data-field="lifetime">{{selectOptions lifetimes selected=draft.lifetime localize=true}}</select>
+        {{#if showRounds}}
+        <input type="number" min="1" step="1" data-field="rounds" value="{{draft.rounds}}"
+          data-tooltip="PF1SV.Field.Rounds">
+        {{/if}}
+        {{#if showBuff}}
+          {{#if hasBuffs}}
+          <select data-field="buff">{{selectOptions buffs selected=draft.buff}}</select>
+          {{else}}
+          <span class="{{css}}none">{{localize "PF1SV.Apply.NoActiveBuffs"}}</span>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "PF1SV.Field.Tag"}}</label>
+      <div class="form-fields">
+        <input type="text" data-field="tag" value="{{draft.tag}}">
+      </div>
+      <p class="hint">{{localize "PF1SV.Hint.Tag"}}</p>
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "PF1SV.Field.Label"}}</label>
+      <div class="form-fields">
+        <input type="text" data-field="label" value="{{draft.label}}">
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="{{css}}check-bar">
+    <button type="button" data-action="checkSelected">
+      <i class="fa-solid fa-object-group" inert></i> {{localize "PF1SV.Apply.CheckSelected"}}
+    </button>
+    <button type="button" data-action="uncheckAll">
+      <i class="fa-regular fa-square" inert></i> {{localize "PF1SV.Apply.UncheckAll"}}
+    </button>
+  </div>
+
+  <ul class="{{css}}observers">
+    <li class="{{css}}observer {{css}}observer-all"
+      {{#if all.state.ruleId}}data-rule="{{all.state.ruleId}}" data-summary="{{all.state.text}}"
+      data-source="{{all.state.source}}" data-observer-name="{{localize "PF1SV.AllObservers"}}"{{/if}}>
+      <input type="checkbox" data-observer="all" {{checked all.checked}}>
+      <i class="fa-solid fa-users {{css}}observer-icon" inert></i>
+      <span class="{{css}}observer-name">{{localize "PF1SV.AllObservers"}}</span>
+      {{> badge state=all.state css=css}}
+    </li>
+    {{#each observers as |o|}}
+    <li class="{{@root.css}}observer"
+      {{#if o.state.ruleId}}data-rule="{{o.state.ruleId}}" data-summary="{{o.state.text}}"
+      data-source="{{o.state.source}}" data-observer-name="{{o.name}}"{{/if}}>
+      <input type="checkbox" data-observer="{{o.id}}" {{checked o.checked}}>
+      <img class="{{@root.css}}observer-img" src="{{o.img}}" alt="">
+      <span class="{{@root.css}}observer-name">{{o.name}}</span>
+      {{> badge state=o.state css=@root.css}}
+    </li>
+    {{/each}}
+  </ul>
+
+  <footer class="{{css}}footer">
+    <button type="button" data-action="apply">
+      <i class="fa-solid fa-check" inert></i> {{localize "PF1SV.Apply.Apply"}}
+    </button>
+    <button type="button" data-action="clearChecked" data-tooltip="PF1SV.Apply.ClearTooltip">
+      <i class="fa-solid fa-eraser" inert></i> {{localize "PF1SV.Apply.Clear"}}
+    </button>
+    <button type="button" data-action="openRules">
+      <i class="fa-solid fa-list-check" inert></i> {{localize "PF1SV.Apply.Rules"}}
+    </button>
+  </footer>
+</div>

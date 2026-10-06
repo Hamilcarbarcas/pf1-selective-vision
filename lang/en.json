@@ -1,0 +1,96 @@
+{
+  "PF1SV": {
+    "Settings": {
+      "HudColumn": {
+        "Name": "Token HUD button column",
+        "Hint": "Which side of the token HUD the Selective Vision button sits on.",
+        "Right": "Right",
+        "Left": "Left"
+      },
+      "RevealHidden": {
+        "Name": "Grants reveal hidden tokens",
+        "Hint": "A grant can show a GM-hidden token to the observers it names."
+      }
+    },
+    "Hud": {
+      "Button": "Selective Vision"
+    },
+    "Kind": {
+      "grant": "Grant",
+      "restore": "Restore",
+      "deny": "Deny"
+    },
+    "Walls": {
+      "On": "walls block",
+      "Off": "ignores walls"
+    },
+    "Sense": {
+      "Sight": "Normal sight"
+    },
+    "Source": {
+      "Manual": "Manual"
+    },
+    "State": {
+      "None": "Normal"
+    },
+    "AllObservers": "All observers",
+    "Missing": "Missing ({id})",
+    "Lifetime": {
+      "keep": "Keep current",
+      "manual": "Until removed",
+      "moves": "Until target moves",
+      "rounds": "Rounds",
+      "buff": "While a buff is active",
+      "UntilMoves": "until target moves",
+      "RoundsLeft": "{rounds} rounds left",
+      "Expired": "expired",
+      "WhileBuff": "while {buff} is active",
+      "MissingBuff": "a missing buff"
+    },
+    "Field": {
+      "Kind": "Rule",
+      "Sense": "Shown as",
+      "Walls": "Walls block",
+      "Priority": "Priority",
+      "Lifetime": "Lasts",
+      "Rounds": "Rounds",
+      "Tag": "Tag",
+      "Label": "Note"
+    },
+    "Hint": {
+      "Walls": "Off: seen through walls. Darkness never blocks a grant.",
+      "Priority": "Highest wins; ties go to the newest.",
+      "Tag": "A new rule replaces an older one with the same tag."
+    },
+    "Apply": {
+      "Title": "Selective Vision: {name}",
+      "CheckSelected": "Check selected",
+      "EditRule": "Click to edit. Right-click to remove.",
+      "RemoveTitle": "Remove rule",
+      "RemoveContent": "Remove <strong>{rule}</strong> ({source}) for {observer}? A lower-priority rule may take over.",
+      "UncheckAll": "Uncheck all",
+      "Apply": "Apply to checked",
+      "Clear": "Clear checked",
+      "ClearTooltip": "Remove manual rules for the checked observers.",
+      "Rules": "Rules",
+      "NoneChecked": "Check at least one observer.",
+      "NoBuff": "Choose a buff, or a different lifetime.",
+      "NoActiveBuffs": "No active buffs"
+    },
+    "Rules": {
+      "Title": "Vision Rules: {name}",
+      "Empty": "No rules on this token.",
+      "Winning": "In effect",
+      "Ended": "Ended",
+      "Edit": "Edit",
+      "Remove": "Remove",
+      "Save": "Save",
+      "Cancel": "Cancel"
+    },
+    "Relay": {
+      "Failed": "Selective Vision: could not save the rule ({error}).",
+      "NoGM": "a GM must be connected",
+      "Timeout": "the GM did not respond"
+    }
+  }
+}

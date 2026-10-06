@@ -1,0 +1,79 @@
+<div class="{{css}}rule-groups">
+  {{#if empty}}
+  <p class="{{css}}none">{{localize "PF1SV.Rules.Empty"}}</p>
+  {{/if}}
+
+  {{#each groups as |group|}}
+  <section class="{{@root.css}}rule-group">
+    <h3 class="{{@root.css}}rule-group-name">{{group.name}}</h3>
+    <ol class="{{@root.css}}rule-list">
+      {{#each group.rules as |rule|}}
+      <li class="{{@root.css}}rule {{@root.css}}rule-{{rule.kind}}{{#unless rule.live}} {{@root.css}}ended{{/unless}}"
+        data-rule="{{rule.id}}">
+        {{#if rule.editing}}
+        <div class="{{@root.css}}rule-edit">
+          <label>{{localize "PF1SV.Field.Kind"}}
+            <select data-edit="kind">{{selectOptions @root.kinds selected=rule.editing.kind localize=true}}</select>
+          </label>
+          {{#if rule.editGrant}}
+          <label>{{localize "PF1SV.Field.Sense"}}
+            <select data-edit="sense">{{selectOptions @root.senses selected=rule.editing.sense valueAttr="id" labelAttr="label"}}</select>
+          </label>
+          <label class="{{@root.css}}inline">
+            <input type="checkbox" data-edit="walls" {{checked rule.editing.walls}}> {{localize "PF1SV.Field.Walls"}}
+          </label>
+          {{/if}}
+          <label>{{localize "PF1SV.Field.Priority"}}
+            <input type="number" step="1" data-edit="priority" value="{{rule.editing.priority}}">
+          </label>
+          <label>{{localize "PF1SV.Field.Lifetime"}}
+            <select data-edit="lifetime">{{selectOptions @root.lifetimes selected=rule.editing.lifetime localize=true}}</select>
+          </label>
+          {{#if rule.editRounds}}
+          <label>{{localize "PF1SV.Field.Rounds"}}
+            <input type="number" min="1" step="1" data-edit="rounds" value="{{rule.editing.rounds}}">
+          </label>
+          {{/if}}
+          <label>{{localize "PF1SV.Field.Tag"}}
+            <input type="text" data-edit="tag" value="{{rule.editing.tag}}">
+          </label>
+          <label>{{localize "PF1SV.Field.Label"}}
+            <input type="text" data-edit="label" value="{{rule.editing.label}}">
+          </label>
+          <div class="{{@root.css}}rule-buttons">
+            <button type="button" data-action="save">
+              <i class="fa-solid fa-floppy-disk" inert></i> {{localize "PF1SV.Rules.Save"}}
+            </button>
+            <button type="button" data-action="cancel">{{localize "PF1SV.Rules.Cancel"}}</button>
+          </div>
+        </div>
+        {{else}}
+        <div class="{{@root.css}}rule-main">
+          <span class="{{@root.css}}badge {{@root.css}}badge-{{rule.kind}}">{{rule.summary}}</span>
+          <span class="{{@root.css}}rule-priority" data-tooltip="PF1SV.Field.Priority">{{rule.priority}}</span>
+          {{#if rule.winning}}
+          <span class="{{@root.css}}state {{@root.css}}state-winning">{{localize "PF1SV.Rules.Winning"}}</span>
+          {{/if}}
+          {{#unless rule.live}}
+          <span class="{{@root.css}}state {{@root.css}}state-ended">{{localize "PF1SV.Rules.Ended"}}</span>
+          {{/unless}}
+          <span class="{{@root.css}}rule-spacer"></span>
+          <button type="button" class="icon fa-solid fa-pen" data-action="edit"
+            data-tooltip="PF1SV.Rules.Edit"></button>
+          <button type="button" class="icon fa-solid fa-trash" data-action="remove"
+            data-tooltip="PF1SV.Rules.Remove"></button>
+        </div>
+        <div class="{{@root.css}}rule-meta">
+          <span>{{rule.source}}{{#if rule.tag}} · <code>{{rule.tag}}</code>{{/if}}</span>
+          <span>{{rule.lifetime}}</span>
+        </div>
+        {{#if rule.label}}
+        <div class="{{@root.css}}rule-label">{{rule.label}}</div>
+        {{/if}}
+        {{/if}}
+      </li>
+      {{/each}}
+    </ol>
+  </section>
+  {{/each}}
+</div>
